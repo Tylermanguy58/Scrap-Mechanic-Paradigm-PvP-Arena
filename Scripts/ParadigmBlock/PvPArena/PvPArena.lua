@@ -1,23 +1,27 @@
-ParadigmBlock.PvPArena.PvPArena = class()
+paradigm_block.pvp_arena.PvPArena = class()
 
-function ParadigmBlock.PvPArena.PvPArena:init()
+local pvp_arena = paradigm_block.pvp_arena
+local PvPArena = pvp_arena.PvPArena
+
+function PvPArena:init()
     self.games = {}
 end 
 
-function ParadigmBlock.PvPArena.PvPArena:CreateGame(name)
-    local newGame = ParadigmBlock.PvPArena.Game()
+function PvPArena:CreateGame(name)
+    local newGame = pvp_arena.Game()
     newGame:init(name, #self.games + 1)
     table.insert(self.games, newGame)
 end
 
-function ParadigmBlock.PvPArena.PvPArena:StartGame(id)
+function PvPArena:StartGame(id)
 end
 
-function ParadigmBlock.PvPArena.PvPArena:EndGame(id)
+function PvPArena:EndGame(id)
 end
 
-function ParadigmBlock.PvPArena.PvPArena:server_onFixedUpdate(deltaTime)
-    for i, game in ipairs(self.games) do 
+function PvPArena:server_onFixedUpdate(deltaTime)
+    print("hi")
+    for i, game in ipairs(self.games) do
         game:server_onFixedUpdate(deltaTime)
     end
 end

@@ -9,11 +9,9 @@ function Game:server_onCreate()
 		self.sv.saved.world = sm.world.createWorld( "$CONTENT_DATA/Scripts/World.lua", "World" )
 		self.storage:save( self.sv.saved )
 	end
-    self.sv.Arena = ParadigmBlock.PvPArena.PvPArena()
+    self.sv.Arena = paradigm_block.pvp_arena.PvPArena()
     self.sv.Arena:init()
     self.sv.Arena:CreateGame("sup1")
-    self.sv.Arena:CreateGame("sup2")
-    self.sv.Arena:CreateGame("sup3")
 end
 
 function Game:server_onPlayerJoined(player, isNewPlayer)

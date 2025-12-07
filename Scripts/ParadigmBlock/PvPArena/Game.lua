@@ -1,7 +1,12 @@
-ParadigmBlock.PvPArena.Game = class()
+local pvp_arena = paradigm_block.pvp_arena
+
+pvp_arena.Game = class()
+
+local Game = pvp_arena.Game
 
 --gamemodes enum
-ParadigmBlock.PvPArena.GameModeIDs = 
+
+pvp_arena.GameModeIDs = 
 {
     --PVP
     PL = 1, --Payload
@@ -15,28 +20,33 @@ ParadigmBlock.PvPArena.GameModeIDs =
     GG = 9, --Gun Game
     BR = 10, --Battle Royale
     CP = 11, --Control Points
-    HP = 12, --Hostage Rescue
+    HR = 12, --Hostage Rescue
     --PVE
-    ZS = 13 --Zombie Swarm
+    ZS = 13 --Zombie Survival
 }
 
-function ParadigmBlock.PvPArena.Game:server_onFixedUpdate(deltatime)
-    print(self)
+function Game:server_onFixedUpdate(deltatime)
+    if self.isActive then
+    end
 end
 
-function ParadigmBlock.PvPArena.Game:init(name, id)
+function Game:init(name, id)
     self.name = name 
     self.id = id
     self.isActive = false
     self.gameModeID = 1 
 end
 
-function ParadigmBlock.PvPArena.Game:SetGameMode(gameModeID)
-    self.gameModeID = gameModeID
+function Game:ChangeGameMode(gameModeID)
+    --change gamemode if game is inactive
+    if not self.isActive then 
+        self.gameModeID = gameModeID
+    end
 end
 
-function ParadigmBlock.PvPArena.Game:EndGame()
+function Game:EndGame()
 end
 
-function ParadigmBlock.PvPArena.Game:StartGame()
+function Game:StartGame()
+    self.isActive = true
 end
