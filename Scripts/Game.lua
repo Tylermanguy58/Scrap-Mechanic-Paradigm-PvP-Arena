@@ -1,7 +1,7 @@
-Game = class( nil )
+Game = class()
+dofile("$CONTENT_DATA/Scripts/ParadigmBlock/ParadigmBlockInclude.lua")
 
 function Game:server_onCreate()
-	print("Game.server_onCreate")
     self.sv = {}
 	self.sv.saved = self.storage:load()
     if self.sv.saved == nil then
@@ -9,8 +9,11 @@ function Game:server_onCreate()
 		self.sv.saved.world = sm.world.createWorld( "$CONTENT_DATA/Scripts/World.lua", "World" )
 		self.storage:save( self.sv.saved )
 	end
-    --initialize PvP Arena 
-    ParadigmBlock.PvPArena.server_Initialize()
+    self.sv.Arena = ParadigmBlock.PvPArena.PvPArena()
+    self.sv.Arena:init()
+    self.sv.Arena:CreateGame("sup1")
+    self.sv.Arena:CreateGame("sup2")
+    self.sv.Arena:CreateGame("sup3")
 end
 
 function Game:server_onPlayerJoined(player, isNewPlayer)
@@ -28,6 +31,6 @@ function Game:sv_createPlayerCharacter(world, x, y, player, params)
 	player:setCharacter( character )
 end
 
-function Game:onFixedUpdate(deltaTime)
-    ParadigmBlock.PvPArena.server_OnFixedUpdate(deltaTime)
+function Game:server_onFixedUpdate(deltaTime)
+    self.sv.Arena:server_onFixedUpdate(deltaTime)
 end
